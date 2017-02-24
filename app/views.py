@@ -35,7 +35,7 @@ def login():
     
     form = LoginForm()
      
-    if request.method == "POST" and form.validate_on_sumbit():
+    if request.method == "POST" and form.validate_on_submit():
         # change this to actually validate the entire form submission
         # and not just one field
         if form.username.data:
@@ -69,6 +69,12 @@ def load_user(id):
 ###
 # The functions below should be applicable to all Flask apps.
 ###
+
+@app.route('/secure-page')
+@login_required
+def secure_page():
+    
+    return render_template('secure_page.html')
 
 @app.route('/<file_name>.txt')
 def send_text_file(file_name):
